@@ -1,31 +1,25 @@
 let grid = [
-  ["b", "b", "", "", "", "", "", ""],
-  ["", "", "", "b", "", "", "", ""],
-  ["", "", "", "b", "", "", "", ""],
-  ["", "", "", "b", "", "", "", ""],
-  ["", "", "", "b", "b", "b", "b", ""],
+  ["⛵", "⛵", "", "", "", "", "", ""],
+  ["", "", "", "⛵", "", "", "", ""],
+  ["", "", "", "⛵", "", "", "", ""],
+  ["", "", "", "⛵", "", "", "", ""],
+  ["", "", "", "⛵", "⛵", "⛵", "⛵", ""],
   ["", "", "", "", "", "", "", ""],
   ["", "", "", "", "", "", "", ""],
   ["", "", "", "", "", "", "", ""]
 ];
 
-function displayLine (currentLine) {
-  let lineAsText = '';
-  for (let i = 0; i < currentLine.length; i++) {
-    let currentChar = currentLine[i];
-
-    if (currentChar === "") {
-      currentChar ="~";
-    }
-    lineAsText += currentChar + ' ';
-  }
-  console.log(lineAsText);
-}
 
 function displayGrid () {
-  for (let i = 0; i < grid.length; i++)  {
-    let currentLine = grid[i];
-    displayLine(currentLine);
+  for (let rowIndex = 0; rowIndex < grid.length; rowIndex++)  {
+
+    let currentLine = grid[rowIndex];
+
+    for (let columnIndex = 0; columnIndex < currentLine.length; columnIndex++) {
+      let currentChar = currentLine[columnIndex];
+        let htmlCell = document.getElementById("cell" + rowIndex + columnIndex);
+      htmlCell.textContent = currentChar;
+    }
   }
 }
 
@@ -35,12 +29,12 @@ function sendMissile (rowIndex, columnIndex) {
   let targetCell = grid[rowIndex][columnIndex];
 
   if (targetCell === "") {
-    grid[rowIndex][columnIndex] = "x";
+    grid[rowIndex][columnIndex] = "🌊";
     console.log("loupé");
     displayGrid();
 
-  } else if (targetCell === "b") {
-    grid[rowIndex][columnIndex] = "t";
+  } else if (targetCell === "⛵") {
+    grid[rowIndex][columnIndex] = "💥";
     console.log("touché");
     displayGrid();
 
