@@ -7,6 +7,10 @@ h3 {
   font-size: 30px;
 }
 
+.coordForm {
+  padding: 20px;
+}
+
 .cell {
   width: 60px;
   height: 60px;
