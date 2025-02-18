@@ -27,6 +27,10 @@ const game = {
   {
     game.turn++;
 
+    if(game.turn > 30) {
+      return;
+    }
+    
     const turnTitleElement = document.querySelector(".turnCounter");
 
     turnTitleElement.textContent = "Tour " + game.turn;
@@ -34,10 +38,10 @@ const game = {
 
   checkGameOver: function()
   {
-    if (grid.boatCount === 0 || game.turn > 15) {
+    if (grid.boatCount === 0 || game.turn > 30) {
       return true;
     }
-    
+
     return false;
   },
 

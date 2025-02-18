@@ -44,6 +44,11 @@ const app = {
   },
 
   cellClickHandler: function(event) {
+
+    if(game.checkGameOver()) {
+      return;
+    }
+
     const cellClass = event.target.id;
 
     const rowIndex = cellClass.substring(4)[0];
