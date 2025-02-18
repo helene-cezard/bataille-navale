@@ -57,11 +57,22 @@ function formSubmitHandler (event) {
 
   let coordsInput = document.getElementById("coord").value;
 
+  let coodLetter = coordsInput[0];
+  let coordNumber = coordsInput[1];
+
   let columns = gridHeaders["columns"];
-  let columnIndex = columns.indexOf(coordsInput[0]);
+  let columnIndex = columns.indexOf(coodLetter);
+  console.log(columnIndex);
 
   let rows = gridHeaders["rows"];
-  let rowIndex = rows.indexOf(Number(coordsInput[1]));
+  let rowIndex = rows.indexOf(Number(coordNumber));
+  console.log(rowIndex);
+
+  if (columnIndex === -1 || rowIndex === -1)
+  {
+    console.log("Coordonées invalides");
+    return false;
+  }
 
   sendMissile(rowIndex, columnIndex);
 }
