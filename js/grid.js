@@ -6,6 +6,8 @@ const grid = {
     columns : []
   },
 
+  boatCount: 0,
+
   init: function()
   {
     grid.cells = [
@@ -21,15 +23,18 @@ const grid = {
 
     grid.headers.rows = [1, 2, 3, 4, 5, 6, 7, 8];
     grid.headers.columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+    grid.boatCount = this.countBoats();
   },
 
-  displayGrid: function ()
+  displayGrid: function()
   {
-    for (let rowIndex = 0; rowIndex < grid.cells.length; rowIndex++)  {
+    for (let rowIndex = 0; rowIndex < grid.cells.length; rowIndex++) 
+    {
   
       let currentLine = grid.cells[rowIndex];
   
-      for (let columnIndex = 0; columnIndex < currentLine.length; columnIndex++) {
+      for (let columnIndex = 0; columnIndex < currentLine.length; columnIndex++)
+      {
         let currentChar = currentLine[columnIndex];
           let htmlCell = document.getElementById("cell" + rowIndex + columnIndex);
 
@@ -38,6 +43,24 @@ const grid = {
           }
       }
     }
+  },
+
+  countBoats: function()
+  {
+    let boatCount = 0
+    for (let rowIndex = 0; rowIndex < grid.cells.length; rowIndex++) 
+      {
+        let currentLine = grid.cells[rowIndex];
+        for (let columnIndex = 0; columnIndex < currentLine.length; columnIndex++)
+        {
+          let currentChar = currentLine[columnIndex];  
+            if (currentChar === "b") {
+              boatCount++;
+            }
+        }
+      }
+      console.log(boatCount);
+      return boatCount;
   }
 
 }
