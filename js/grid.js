@@ -30,9 +30,7 @@ const grid = {
   {
     for (let rowIndex = 0; rowIndex < grid.cells.length; rowIndex++) 
     {
-  
       let currentLine = grid.cells[rowIndex];
-  
       for (let columnIndex = 0; columnIndex < currentLine.length; columnIndex++)
       {
         let currentChar = currentLine[columnIndex];
@@ -59,7 +57,6 @@ const grid = {
             }
         }
       }
-      console.log(boatCount);
       return boatCount;
   }
 

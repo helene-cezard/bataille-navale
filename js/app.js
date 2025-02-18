@@ -5,24 +5,34 @@ const app = {
     grid.init();
     grid.displayGrid();
     game.stopGame();
-    let coordForm = document.querySelector(".coordForm");
+    const coordForm = document.querySelector(".coordForm");
     coordForm.addEventListener("submit", app.formSubmitHandler);
+
+    for (let rowIndex = 0; rowIndex < grid.cells.length; rowIndex++) 
+      {
+        let currentLine = grid.cells[rowIndex];
+        for (let columnIndex = 0; columnIndex < currentLine.length; columnIndex++)
+        {
+            let htmlCell = document.getElementById("cell" + rowIndex + columnIndex);
+            htmlCell.addEventListener("click", app.cellClickHandler);
+        }
+      }
   },
 
   formSubmitHandler : function (event) {
     event.preventDefault();
   
-    let coordsInput = document.getElementById("coord").value;
+    const coordsInput = document.getElementById("coord").value;
     document.getElementById("coord").value = "";
   
-    let coodLetter = coordsInput[0];
-    let coordNumber = coordsInput[1];
+    const coodLetter = coordsInput[0];
+    const coordNumber = coordsInput[1];
   
-    let columns = grid.headers.columns;
-    let columnIndex = columns.indexOf(coodLetter);
+    const columns = grid.headers.columns;
+    const columnIndex = columns.indexOf(coodLetter);
   
-    let rows = grid.headers.rows;
-    let rowIndex = rows.indexOf(Number(coordNumber));
+    const rows = grid.headers.rows;
+    const rowIndex = rows.indexOf(Number(coordNumber));
   
     if (columnIndex === -1 || rowIndex === -1)
     {
@@ -31,7 +41,16 @@ const app = {
     }
   
     game.sendMissile(rowIndex, columnIndex);
-  }
+  },
+
+  cellClickHandler: function(event) {
+    const cellClass = event.target.id;
+
+    const rowIndex = cellClass.substring(4)[0];
+    const columnIndex = cellClass.substring(4)[1];
+
+    game.sendMissile(rowIndex, columnIndex);
+  } 
 }
 
 document.addEventListener( "DOMContentLoaded", app.init );
