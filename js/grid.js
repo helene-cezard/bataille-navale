@@ -37,7 +37,7 @@ const grid = {
         let currentChar = currentLine[columnIndex];
           let htmlCell = document.getElementById("cell" + rowIndex + columnIndex);
 
-          if (currentChar != "b") {
+          if (currentChar != "⛵" || game.checkGameOver()) {
             htmlCell.textContent = currentChar;
           }
       }
@@ -53,7 +53,7 @@ const grid = {
         for (let columnIndex = 0; columnIndex < currentLine.length; columnIndex++)
         {
           let currentChar = currentLine[columnIndex];  
-            if (currentChar === "b") {
+            if (currentChar === "⛵") {
               boatCount++;
             }
         }
@@ -67,7 +67,7 @@ const grid = {
 
     let rowIndex = Math.floor(Math.random() * 8);
     let columnIndex = Math.floor(Math.random() * 8);
-    grid.cells[rowIndex][columnIndex] = "b";
+    grid.cells[rowIndex][columnIndex] = "⛵";
     
     if (horizontal) {
       const boatFits = grid.verifyBoatFit(columnIndex, boatSize);
@@ -77,7 +77,7 @@ const grid = {
     else {
       const boatFits = grid.verifyBoatFit(rowIndex, boatSize);
 
-      grid.handleBoatFitVertical(rowIndex, columnIndex, boatSize, boatFits);
+      grid.handleBoatFitVertical(columnIndex, rowIndex, boatSize, boatFits);
     }
     console.log(grid.cells);
   },
@@ -96,14 +96,14 @@ const grid = {
       for (let i = 1; i < boatSize; i++) {
 
         columnIndex ++;
-        grid.cells[rowIndex][columnIndex] = "b";
+        grid.cells[rowIndex][columnIndex] = "⛵";
       }
     }
     else {
       for (let i = 1; i < boatSize; i++) {
 
         columnIndex --;
-        grid.cells[rowIndex][columnIndex] = "b";
+        grid.cells[rowIndex][columnIndex] = "⛵";
       }
     }
   },
@@ -114,14 +114,14 @@ const grid = {
       for (let i = 1; i < boatSize; i++) {
 
         rowIndex ++;
-        grid.cells[rowIndex][columnIndex] = "b";
+        grid.cells[rowIndex][columnIndex] = "⛵";
       }
     }
     else {
       for (let i = 1; i < boatSize; i++) {
 
         rowIndex --;
-        grid.cells[rowIndex][columnIndex] = "b";
+        grid.cells[rowIndex][columnIndex] = "⛵";
       }
     }
   },

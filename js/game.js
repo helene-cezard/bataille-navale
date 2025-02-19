@@ -9,7 +9,7 @@ const game = {
     if (targetCell === "") {
       grid.cells[rowIndex][columnIndex] = "🌊";
 
-    } else if (targetCell === "b") {
+    } else if (targetCell === "⛵") {
       grid.cells[rowIndex][columnIndex] = "💥";
       grid.boatCount--;
 
@@ -47,21 +47,23 @@ const game = {
 
   stopGame: function()
   {
-    if(game.checkGameOver()) {
-      const coordField = document.getElementById("coord");
-      coordField.setAttribute("disabled", "");
-      const result = document.querySelector(".result");
-  
-      if (grid.boatCount === 0) {
-        result.textContent = "Gagné !"
-        result.setAttribute("class", "result win");
-      }
-      else {
-        result.textContent = "Perdu !";
-        result.setAttribute("class", "result lose");
-      }
+    if(!game.checkGameOver())
+    {
+      return;
     }
 
+    const coordField = document.getElementById("coord");
+    coordField.setAttribute("disabled", "");
+    const result = document.querySelector(".result");
 
+    if (grid.boatCount === 0) {
+      result.textContent = "Gagné !"
+      result.setAttribute("class", "result win");
+    }
+    else {
+      result.textContent = "Perdu !";
+      result.setAttribute("class", "result lose");
+      grid.displayGrid();
+    }
   }
 }
