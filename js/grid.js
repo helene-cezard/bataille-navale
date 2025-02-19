@@ -64,64 +64,31 @@ const grid = {
   creatOneBoat: function(boatSize)
   {
     const horizontal  = Math.random() < 0.5;
+    randomInt1 = Math.floor(Math.random() * 8);
+    randomInt2 = Math.floor(Math.random() * 8);
 
-    let rowIndex = Math.floor(Math.random() * 8);
-    let columnIndex = Math.floor(Math.random() * 8);
-    grid.cells[rowIndex][columnIndex] = "⛵";
-    
+    randomIntsArray = [randomInt1];
+
+    if ((randomInt1 + boatSize) < 8) {
+      for (let i = 1; i < boatSize; i++) {
+        randomInt1++;
+        randomIntsArray.push(randomInt1);
+      }
+    }
+    else {
+      for (let i = 1; i < boatSize; i++) {
+        randomInt1--;
+        randomIntsArray.push(randomInt1);
+      }
+    }
+
     if (horizontal) {
-      const boatFits = grid.verifyBoatFit(columnIndex, boatSize);
-
-      grid.handleBoatFitHorizontal(columnIndex, rowIndex, boatSize, boatFits);
-    }
-    else {
-      const boatFits = grid.verifyBoatFit(rowIndex, boatSize);
-
-      grid.handleBoatFitVertical(columnIndex, rowIndex, boatSize, boatFits);
-    }
-    console.log(grid.cells);
-  },
-
-  verifyBoatFit: function(perpendicularIndex, boatSize)
-  {
-    const spaceLeft = (grid.cells.length - 1) - (boatSize - 2);
-    if (perpendicularIndex < spaceLeft) {
-      return true;
-    }
-  },
-
-  handleBoatFitHorizontal: function(columnIndex, rowIndex, boatSize, boatFits)
-  {
-    if (boatFits) {
-      for (let i = 1; i < boatSize; i++) {
-
-        columnIndex ++;
-        grid.cells[rowIndex][columnIndex] = "⛵";
+      for (randInt of randomIntsArray) {
+        grid.cells[randomInt2][randInt] = "⛵";
       }
-    }
-    else {
-      for (let i = 1; i < boatSize; i++) {
-
-        columnIndex --;
-        grid.cells[rowIndex][columnIndex] = "⛵";
-      }
-    }
-  },
-
-  handleBoatFitVertical: function(columnIndex, rowIndex, boatSize, boatFits)
-  {
-    if (boatFits) {
-      for (let i = 1; i < boatSize; i++) {
-
-        rowIndex ++;
-        grid.cells[rowIndex][columnIndex] = "⛵";
-      }
-    }
-    else {
-      for (let i = 1; i < boatSize; i++) {
-
-        rowIndex --;
-        grid.cells[rowIndex][columnIndex] = "⛵";
+    } else {
+      for (randInt of randomIntsArray) {
+        grid.cells[randInt][randomInt2] = "⛵";
       }
     }
   },
@@ -133,6 +100,8 @@ const grid = {
     grid.creatOneBoat(2);
     grid.creatOneBoat(3);
     grid.creatOneBoat(4);
+
+    console.log(grid.cells);
     
   }
 
