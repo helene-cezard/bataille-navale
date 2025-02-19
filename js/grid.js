@@ -67,40 +67,61 @@ const grid = {
 
     let rowIndex = Math.floor(Math.random() * 8);
     let columnIndex = Math.floor(Math.random() * 8);
-
     grid.cells[rowIndex][columnIndex] = "b";
     
     if (horizontal) {
+      const boatFits = grid.verifyBoatFit(columnIndex, boatSize);
 
-      if (columnIndex < 7 - (boatSize - 2)) {
-        for (let i = 1; i < boatSize; i++) {
+      grid.handleBoatFitHorizontal(columnIndex, rowIndex, boatSize, boatFits);
+    }
+    else {
+      const boatFits = grid.verifyBoatFit(rowIndex, boatSize);
 
-          columnIndex ++;
-          grid.cells[rowIndex][columnIndex] = "b";
-        }
-      }
-      else {
-        for (let i = 1; i < boatSize; i++) {
+      grid.handleBoatFitVertical(rowIndex, columnIndex, boatSize, boatFits);
+    }
+    console.log(grid.cells);
+  },
 
-          columnIndex --;
-          grid.cells[rowIndex][columnIndex] = "b";
-        }
+  verifyBoatFit: function(perpendicularIndex, boatSize)
+  {
+    const spaceLeft = (grid.cells.length - 1) - (boatSize - 2);
+    if (perpendicularIndex < spaceLeft) {
+      return true;
+    }
+  },
+
+  handleBoatFitHorizontal: function(columnIndex, rowIndex, boatSize, boatFits)
+  {
+    if (boatFits) {
+      for (let i = 1; i < boatSize; i++) {
+
+        columnIndex ++;
+        grid.cells[rowIndex][columnIndex] = "b";
       }
     }
     else {
-      if (rowIndex < 7 - (boatSize - 2)) {
-        for (let i = 1; i < boatSize; i++) {
+      for (let i = 1; i < boatSize; i++) {
 
-          rowIndex ++;
-          grid.cells[rowIndex][columnIndex] = "b";
-        }
+        columnIndex --;
+        grid.cells[rowIndex][columnIndex] = "b";
       }
-      else {
-        for (let i = 1; i < boatSize; i++) {
+    }
+  },
 
-          rowIndex --;
-          grid.cells[rowIndex][columnIndex] = "b";
-        }
+  handleBoatFitVertical: function(columnIndex, rowIndex, boatSize, boatFits)
+  {
+    if (boatFits) {
+      for (let i = 1; i < boatSize; i++) {
+
+        rowIndex ++;
+        grid.cells[rowIndex][columnIndex] = "b";
+      }
+    }
+    else {
+      for (let i = 1; i < boatSize; i++) {
+
+        rowIndex --;
+        grid.cells[rowIndex][columnIndex] = "b";
       }
     }
   },
